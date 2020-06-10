@@ -1,0 +1,46 @@
+body {
+  background-color: beige;
+}
+
+.row {
+  margin-bottom: 30px;
+}
+
+img {
+  width: 125px;
+  border: 2px solid transparent;
+  padding: 10px;
+}
+
+.selected {
+  background-color: white;
+  border: 2px solid black;
+}
+
+.itemCell,
+.scoreCell {
+  display: inline-block;
+  vertical-align: top;
+  width: 300px;
+  font-size: 24px;
+  text-align: center;
+}
+
+.itemCell {
+  height: 208px;
+  line-height: 208px;
+}
+
+#middle {
+  font-size: 36px;
+  color: #ff4c00;
+}
+
+#computer {
+  transform: scaleX(-1);
+}
+
+#startButton {
+  font-size: 18px;
+  padding: 5px;
+}

@@ -1,135 +1,132 @@
-var rock = document.getElementById("rock");
-var paper = document.getElementById("paper");
-var scissors = document.getElementById("scissors");
+let rock = document.getElementById(`rock`)
+let paper = document.getElementById(`paper`)
+let scissors = document.getElementById(`scissors`)
 
-var you = document.getElementById("you");
-var middle = document.getElementById("middle");
-var computer = document.getElementById("computer");
+let you = document.getElementById(`you`)
+let middle = document.getElementById(`middle`)
+let computer = document.getElementById(`computer`)
 
-var yourScoreDisplay = document.getElementById("yourScore");
-var startButton = document.getElementById("start");
-var computerScoreDisplay = document.getElementById("computerScore");
+let yourScoreParagraph = document.getElementById(`yourScoreParagraph`)
+let startButton = document.getElementById(`startButton`)
+let computerScoreParagraph = document.getElementById(`computerScoreParagraph`)
 
-var count;
-var countId;
-var started = false;
-var selected = null;
-var yourScore = 0;
-var computerScore = 0;
+let gameStarted = false
+let count = 3
+let selectedImage
+let yourScore = 0
+let computerScore = 0
+let intervalId
 
-startButton.addEventListener("click", start);
-rock.addEventListener("click", select);
-paper.addEventListener("click", select);
-scissors.addEventListener("click", select);
+startButton.addEventListener(`click`, start)
+rock.addEventListener(`click`, clickImage)
+paper.addEventListener(`click`, clickImage)
+scissors.addEventListener(`click`, clickImage)
 
 function start() {
-    if (selected) {
-        selected.classList.remove("selected");
-    }
+  if (selectedImage != null) {
+    selectedImage.classList.remove(`selected`)
+    selectedImage = null
+  }
 
-    you.classList.remove("rock", "paper", "scissors");
-    you.innerHTML = "Click an item above";
-    middle.innerHTML = "3";
-    computer.classList.remove("rock", "paper", "scissors");
-    startButton.disabled = true;
+  you.innerHTML = `Click an item above`
+  you.style.backgroundImage = ``
+  middle.innerHTML = `3`
+  computer.style.backgroundImage = ``
+  startButton.disabled = true
 
-    count = 1;
-    countId = setInterval(increaseCount, 1000);
-    started = true;
-    selected = null;
+  gameStarted = true
+  count = 3
+  intervalId = setInterval(decreaseCount, 1000)
 }
 
-function select() {
-    if (started) {
-        if (selected) {
-            selected.classList.remove("selected");
-        }
+function decreaseCount() {
+  count = count - 1
 
-        this.classList.add("selected");
-        selected = this;
+  if (count > 0) {
+    middle.innerHTML = count
+  }
+  else {
+    let selectedItem
+
+    if (selectedImage == null) {
+      you.innerHTML = `Nothing selected`
     }
+    else {
+      you.innerHTML = ``
+
+      selectedItem = selectedImage.id
+      you.style.backgroundImage = `url("${selectedItem}.png")`
+    }
+
+    let randomNumber = Math.floor(Math.random() * 3)
+    let computerItem
+
+    if (randomNumber == 0) {
+      computerItem = `rock`
+    }
+    else if (randomNumber == 1) {
+      computerItem = `paper`
+    }
+    else if (randomNumber == 2) {
+      computerItem = `scissors`
+    }
+
+    computer.style.backgroundImage = `url("${computerItem}.png")`
+
+    if (selectedItem == null) {
+      middle.innerHTML = `Computer wins`
+      computerScore++
+    }
+    else if (selectedItem == computerItem) {
+      middle.innerHTML = `Tie game`
+    }
+    else if (selectedItem == `rock`) {
+      if (computerItem == `paper`) {
+        middle.innerHTML = `Computer wins`
+        computerScore++
+      }
+      else if (computerItem == `scissors`) {
+        middle.innerHTML = `You win`
+        yourScore++
+      }
+    }
+    else if (selectedItem == 'paper') {
+      if (computerItem == `rock`) {
+        middle.innerHTML = `You win`
+        yourScore++
+      }
+      else if (computerItem == `scissors`) {
+        middle.innerHTML = `Computer wins`
+        computerScore++
+      }
+    }
+    else if (selectedItem == 'scissors') {
+      if (computerItem == `rock`) {
+        middle.innerHTML = `Computer wins`
+        computerScore++
+      }
+      else if (computerItem == `paper`) {
+        middle.innerHTML = `You win`
+        yourScore++
+      }
+    }
+
+    yourScoreParagraph.innerHTML = `You: ${yourScore}`
+    computerScoreParagraph.innerHTML = `Computer: ${computerScore}`
+    startButton.disabled = false
+
+    gameStarted = false
+    clearInterval(intervalId)
+  }
 }
 
-function increaseCount() {
-    count++;
-
-    if (count == 2) {
-        middle.innerHTML = "2";
+function clickImage() {
+  if (gameStarted) {
+    if (selectedImage != null) {
+      selectedImage.classList.remove(`selected`)
     }
-    else if (count == 3) {
-        middle.innerHTML = "1";
-    }
-    else if (count == 4) {
-        if (selected) {
-            var selectedItem = selected.getAttribute("id");
-            you.classList.add(selectedItem);
-            you.innerHTML = "";
-        }
-        else {
-            you.innerHTML = "Nothing selected";
-        }
 
-        var computerSelection = Math.floor(Math.random() * 3);
-
-        if (computerSelection == 0) {
-            computer.classList.add("rock");
-        }
-        else if (computerSelection == 1) {
-            computer.classList.add("paper");
-        }
-        else if (computerSelection == 2) {
-            computer.classList.add("scissors");
-        }
-
-        if (selectedItem == "rock") {
-            if (computerSelection == 0) {
-                middle.innerHTML = "Tie game";
-            }
-            else if (computerSelection == 1) {
-                middle.innerHTML = "Computer wins";
-                computerScore++;
-            }
-            else if (computerSelection == 2) {
-                middle.innerHTML = "You win";
-                yourScore++;
-            }
-        }
-        else if (selectedItem == "paper") {
-            if (computerSelection == 0) {
-                middle.innerHTML = "You win";
-                yourScore++;
-            }
-            else if (computerSelection == 1) {
-                middle.innerHTML = "Tie game";
-            }
-            else if (computerSelection == 2) {
-                middle.innerHTML = "Computer wins";
-                computerScore++;
-            }
-        }
-        else if (selectedItem == "scissors") {
-            if (computerSelection == 0) {
-                middle.innerHTML = "Computer wins";
-                computerScore++;
-            }
-            else if (computerSelection == 1) {
-                middle.innerHTML = "You win";
-                yourScore++;
-            }
-            else if (computerSelection == 2) {
-                middle.innerHTML = "Tie game";
-            }
-        }
-        else {
-            middle.innerHTML = "Computer wins";
-            computerScore++;
-        }
-
-        yourScoreDisplay.innerHTML = "You: " + yourScore;
-        computerScoreDisplay.innerHTML = "Computer: " + computerScore;
-
-        startButton.disabled = false;
-        started = false;
-        clearInterval(countId);
-    }
+    selectedImage = this
+    selectedImage.classList.add(`selected`)
+  }
 }
