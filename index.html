@@ -1,37 +1,33 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Rock Paper Scissors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.35" />
+    <link href="style.css" rel="stylesheet" />
+    <script src="script.js" defer></script>
+  </head>
 
-<head>
-	<title>Rock Paper Scissors</title>
-	<meta name="viewport" content="width=device-width, initial-scale=0.35">
-	<link href="style.css" rel="stylesheet">
-	<script src="script.js" defer>
+  <body>
+    <h1>Rock Paper Scissors</h1>
 
-	</script>
-</head>
-
-<body>
-	<h1>Rock Paper Scissors</h1>
-
-	<div class="row">
-		<img src="rock.png" id="rock">
-    <img src="paper.png" id="paper">
-    <img src="scissors.png" id="scissors">
-  </div>
-
-  <div class="row">
-    <div class="itemCell" id="you"></div>
-    <div class="itemCell" id="middle"></div>
-    <div class="itemCell" id="computer"></div>
-  </div>
-
-  <div class="row">
-    <div class="scoreCell" id="yourScoreParagraph">You: 0</div>
-    <div class="scoreCell">
-      <button id="startButton">Start game</button>
+    <div class="row">
+      <img src="rock.png" id="rock" />
+      <img src="paper.png" id="paper" />
+      <img src="scissors.png" id="scissors" />
     </div>
-    <div class="scoreCell" id="computerScoreParagraph">Computer: 0</div>
-  </div>
-</body>
 
+    <div class="row">
+      <div class="itemCell" id="you"></div>
+      <div class="itemCell" id="middle"></div>
+      <div class="itemCell" id="computer"></div>
+    </div>
+
+    <div class="row">
+      <div class="scoreCell" id="yourScoreParagraph">You: 0</div>
+      <div class="scoreCell">
+        <button id="startButton">Start game</button>
+      </div>
+      <div class="scoreCell" id="computerScoreParagraph">Computer: 0</div>
+    </div>
+  </body>
 </html>

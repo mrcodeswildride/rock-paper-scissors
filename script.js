@@ -44,14 +44,12 @@ function decreaseCount() {
 
   if (count > 0) {
     middle.innerHTML = count
-  }
-  else {
+  } else {
     let selectedItem
 
     if (selectedImage == null) {
       you.innerHTML = `Nothing selected`
-    }
-    else {
+    } else {
       you.innerHTML = ``
 
       selectedItem = selectedImage.id
@@ -63,11 +61,9 @@ function decreaseCount() {
 
     if (randomNumber == 0) {
       computerItem = `rock`
-    }
-    else if (randomNumber == 1) {
+    } else if (randomNumber == 1) {
       computerItem = `paper`
-    }
-    else if (randomNumber == 2) {
+    } else if (randomNumber == 2) {
       computerItem = `scissors`
     }
 
@@ -76,36 +72,29 @@ function decreaseCount() {
     if (selectedItem == null) {
       middle.innerHTML = `Computer wins`
       computerScore++
-    }
-    else if (selectedItem == computerItem) {
+    } else if (selectedItem == computerItem) {
       middle.innerHTML = `Tie game`
-    }
-    else if (selectedItem == `rock`) {
+    } else if (selectedItem == `rock`) {
       if (computerItem == `paper`) {
         middle.innerHTML = `Computer wins`
         computerScore++
-      }
-      else if (computerItem == `scissors`) {
+      } else if (computerItem == `scissors`) {
         middle.innerHTML = `You win`
         yourScore++
       }
-    }
-    else if (selectedItem == 'paper') {
+    } else if (selectedItem == "paper") {
       if (computerItem == `rock`) {
         middle.innerHTML = `You win`
         yourScore++
-      }
-      else if (computerItem == `scissors`) {
+      } else if (computerItem == `scissors`) {
         middle.innerHTML = `Computer wins`
         computerScore++
       }
-    }
-    else if (selectedItem == 'scissors') {
+    } else if (selectedItem == "scissors") {
       if (computerItem == `rock`) {
         middle.innerHTML = `Computer wins`
         computerScore++
-      }
-      else if (computerItem == `paper`) {
+      } else if (computerItem == `paper`) {
         middle.innerHTML = `You win`
         yourScore++
       }
